@@ -2,7 +2,7 @@ import React, {Fragment, useState} from "react";
 import Navbar from "../shared/Navbar";
 import {getUser, getUserSync} from "../../service/rest/UserRestClient";
 
-export default function CurrentUser() {
+export default function User() {
 
     let [user, setUser] = useState(null);
 

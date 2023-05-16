@@ -5,7 +5,7 @@ import ConfirmSignUp from "./sign/ConfirmSignUp";
 import SignIn from "./sign/SignIn";
 import SignUpResult from "./sign/SignUpResult";
 import Timetable from "./timetable/Timetable";
-import CurrentUser from "./user/CurrentUser";
+import User from "./user/User";
 
 export const AppRouter = () => {
     return (
@@ -15,7 +15,7 @@ export const AppRouter = () => {
             <Route path="sign-up/confirm" element={<ConfirmSignUp/>}/>
             <Route path="sign-in" element={<SignIn/>}/>
             <Route path="/" element={<Timetable/>}/>
-            <Route path="/me" element={<CurrentUser/>}/>
+            <Route path="/me" element={<User/>}/>
         </Routes>
     )
 }
