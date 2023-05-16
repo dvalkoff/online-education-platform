@@ -1,7 +1,7 @@
 package ru.mirea.valkov.education.platform.domain.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,13 +26,15 @@ public class AppUserService implements UserDetailsService {
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
 
+    @Value("${hosts.frontend}")
+    private String frontendHost;
+
     @Transactional
     public void createNewUser(AppUser appUser) throws IllegalStateException {
         Optional<AppUser> unexpectedUser = appUserRepository.findByUsername(appUser.getUsername());
 
         String token = UUID.randomUUID().toString();
-        // TODO: remove hard code
-        String linkToConfirmToken = "https://my-diary-appl.herokuapp.com/sign-up/confirm?token=" + token;
+        String linkToConfirmToken = String.format("%s/sign-up/confirm?token=%s", frontendHost, token);
 
         ConfirmationToken confirmationToken = new ConfirmationToken(
                 null,
@@ -93,7 +95,7 @@ public class AppUserService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public AppUser loadUserByUsername(String username) throws UsernameNotFoundException {
         return appUserRepository.findByUsername(username)
                 .orElseThrow(() -> new IllegalStateException(String.format("User with username %s not found", username)));
     }

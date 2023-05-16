@@ -1,6 +1,7 @@
 package ru.mirea.valkov.education.platform.email;
 
 public class EmailUtils {
+
     public static String buildEmail(String link) { // TODO: move to resources
         return "<!DOCTYPE html>\n" +
                 "<html>\n" +

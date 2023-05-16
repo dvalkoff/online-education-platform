@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    build: .
+    build: ./backend
     ports:
       - '8080:8080'
     restart: always
@@ -9,6 +9,9 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgresdb
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
+      FRONTEND_HOST: http://localhost:3000
+      BACKEND_HOST: http://localhost:8080
+      EMAIL_USERNAME: ER_radd@mail.ru
 
   db:
     image: postgres:14

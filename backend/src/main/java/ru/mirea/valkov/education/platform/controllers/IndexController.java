@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-@Controller
+//@Controller
 @RequiredArgsConstructor
 public class IndexController {
 

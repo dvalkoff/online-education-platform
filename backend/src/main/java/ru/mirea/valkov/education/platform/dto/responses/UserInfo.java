@@ -3,13 +3,15 @@ package ru.mirea.valkov.education.platform.dto.responses;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
-public class UserInfoResponse {
+public class UserInfo {
+    private Long id;
     private String firstName;
     private String lastName;
     private String username;
-    private Set<CourseInfoResponse> subscriptions;
+    private List<CourseInfo> subscriptions;
+    private List<CourseInfo> ownCourses;
 }

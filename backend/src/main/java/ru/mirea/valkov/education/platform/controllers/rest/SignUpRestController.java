@@ -9,7 +9,7 @@ import ru.mirea.valkov.education.platform.dto.requests.AppUserDetailsRequest;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/v1/sign-up")
-public class SignRestController {
+public class SignUpRestController {
     private final SignService signService;
 
     @PostMapping

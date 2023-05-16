@@ -3,6 +3,10 @@ server:
     include-message: always
     include-binding-errors: always
 
+hosts:
+  backend: ${BACKEND_HOST}
+  frontend: ${FRONTEND_HOST}
+
 spring:
   thymeleaf:
     enabled: true
@@ -20,9 +24,10 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+        show_sql: true
 
   mail:
-    username: ER_radd@mail.ru
+    username: ${EMAIL_USERNAME}
     password: ${EMAIL_PASSWORD}
     host: smtp.mail.ru
     port: 587
@@ -37,3 +42,10 @@ spring:
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
+
+security:
+  cors:
+    allowed-origins:
+      - ${hosts.frontend}
+    allowed-methods: ["GET", "POST", "PUT", "DELETE", "PATCH"]
+    allowed-headers: ["*"]

@@ -9,16 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ru.mirea.valkov.education.platform.domain.entities.AppUser;
 import ru.mirea.valkov.education.platform.domain.entities.Course;
-import ru.mirea.valkov.education.platform.domain.services.CourseService;
 import ru.mirea.valkov.education.platform.domain.services.IndexService;
 import ru.mirea.valkov.education.platform.domain.services.LessonService;
 import ru.mirea.valkov.education.platform.dto.requests.LessonDetailsRequest;
 
-@Controller
+//@Controller
 @RequiredArgsConstructor
 public class LessonController {
     private final IndexService indexService;
-    private final CourseService courseService;
     private final LessonService lessonService;
 
     @GetMapping("/courses/{courseTitle}/create-lesson")

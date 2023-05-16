@@ -10,6 +10,7 @@ import java.util.List;
 
 @Repository
 public interface LessonRepository extends JpaRepository<Lesson, Long> {
+
     List<Lesson> findAllByCourse_SubscribersOrderByStartsAt(AppUser appUser);
 
     List<Lesson> findAllByCourse(Course course);

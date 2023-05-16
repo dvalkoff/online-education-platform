@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.mirea.valkov.education.platform.domain.services.SignService;
 import ru.mirea.valkov.education.platform.dto.requests.AppUserDetailsRequest;
 
-@Controller
+//@Controller
 @RequiredArgsConstructor
 public class SignController {
     private final SignService signService;

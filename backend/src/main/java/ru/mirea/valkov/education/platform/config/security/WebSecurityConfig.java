@@ -6,32 +6,39 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.CorsConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import javax.servlet.http.HttpServletRequest;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
+    private final CorsConfigProperties corsConfigProperties;
 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .requiresChannel()
-                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
-                .requiresSecure()
                 .and()
                 .csrf().disable()
-                .cors().disable()
+                .cors()
+                    .configurationSource(corsConfigurationSource())
+                .and()
                 .authorizeRequests()
-                    .antMatchers("/sign-up/**").permitAll()
+                    .antMatchers("/api/v1/sign-up/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
                 .formLogin()
-                    .loginPage("/login").permitAll()
+                    .loginPage("/api/v1/sign-in").permitAll()
                     .defaultSuccessUrl("/", true);
     }
 
@@ -46,5 +53,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
+    }
+
+    private CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.setAllowedOriginPatterns(corsConfigProperties.getAllowedOrigins());
+        corsConfiguration.setAllowedMethods(corsConfigProperties.getAllowedMethods());
+        corsConfiguration.setAllowedHeaders(corsConfigProperties.getAllowedHeaders());
+        corsConfiguration.setAllowCredentials(true);
+        return request -> corsConfiguration;
     }
 }

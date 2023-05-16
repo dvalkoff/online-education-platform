@@ -2,7 +2,6 @@ package ru.mirea.valkov.education.platform.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,7 @@ import ru.mirea.valkov.education.platform.domain.entities.Course;
 
 import java.util.List;
 
-@Controller
+//@Controller
 @RequiredArgsConstructor
 public class UserController {
     private final IndexService indexService;
